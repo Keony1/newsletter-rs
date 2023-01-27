@@ -130,7 +130,6 @@ mod tests {
     #[tokio::test]
     async fn send_email_sends_the_expected_request() {
         let mock_server = MockServer::start().await;
-        let sender = email();
         let email_client = email_client(mock_server.uri());
 
         Mock::given(header_exists("X-Postmark-Server-Token"))
@@ -155,7 +154,6 @@ mod tests {
     #[tokio::test]
     async fn send_email_succeeds_if_the_server_returns_200() {
         let mock_server = MockServer::start().await;
-        let sender = email();
         let email_client = email_client(mock_server.uri());
 
         let subscriber_email = email();
@@ -201,7 +199,6 @@ mod tests {
     #[tokio::test]
     async fn send_email_times_out_if_the_server_take_too_long() {
         let mock_server = MockServer::start().await;
-        let sender = email();
         let email_client = email_client(mock_server.uri());
 
         let subscriber_email = email();
