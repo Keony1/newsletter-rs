@@ -35,7 +35,6 @@ async fn subscribe_persist_new_subscriber() {
 
     app.post_subscription(body.into()).await;
 
-
     let saved = sqlx::query!("SELECT email, name, status FROM subscriptions",)
         .fetch_one(&app.db_pool)
         .await
@@ -122,4 +121,21 @@ async fn subscribe_sends_a_confirmation_email_with_a_link() {
     let confirmation_links = app.get_confirmation_links(&email_request);
 
     assert_eq!(confirmation_links.html, confirmation_links.plain_text);
+}
+
+#[tokio::test]
+async fn subscription_fails_if_there_is_a_fatal_database_error() {
+    let app = spawn_app().await;
+    let body = "name=keony%20schroer&email=keony.shr%40gmail.com";
+
+    // Sabotage the database
+    sqlx::query!("ALTER TABLE subscription_tokens DROP COLUMN subscription_token")
+        .execute(&app.db_pool)
+        .await
+        .unwrap();
+
+    let response = app.post_subscription(body.into()).await;
+
+
+    assert_eq!(response.status().as_u16(), 500);
 }
