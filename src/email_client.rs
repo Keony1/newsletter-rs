@@ -175,7 +175,7 @@ mod tests {
     #[tokio::test]
     async fn send_email_fails_if_the_server_returns_500() {
         let mock_server = MockServer::start().await;
-        let sender = email();
+        // let sender = email();
         let email_client = email_client(mock_server.uri());
 
         let subscriber_email = email();
