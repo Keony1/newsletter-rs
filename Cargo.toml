@@ -32,6 +32,7 @@ validator = "0.14"
 reqwest = { version = "0.11", default-features = false, features = [
   "json",
   "rustls-tls",
+  "cookies",
 ] }
 rand = { version = "0.8", features = ["std_rng"] }
 thiserror = "1"
@@ -40,6 +41,7 @@ base64 = "0.13"
 argon2 = { version = "0.3", features = ["std"] }
 urlencoding = "2"
 htmlescape = "0.3"
+actix-web-flash-messages = { version = "0.3", features = ["cookies"] }
 
 
 [dependencies.sqlx]
