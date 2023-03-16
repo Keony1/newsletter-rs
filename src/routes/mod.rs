@@ -5,6 +5,7 @@ mod newsletters;
 mod home;
 mod login;
 mod authentication;
+mod admin;
 
 pub use health_check::*;
 pub use subscriptions::*;
@@ -13,3 +14,4 @@ pub use newsletters::*;
 pub use home::*;
 pub use login::*;
 pub use authentication::*;
+pub use admin::*;
