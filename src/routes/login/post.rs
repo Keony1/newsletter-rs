@@ -8,7 +8,7 @@ use reqwest::StatusCode;
 use secrecy::Secret;
 use sqlx::PgPool;
 
-use crate::routes::authentication::{validate_credentials, AuthError, Credentials};
+use crate::authentication::{validate_credentials, AuthError, Credentials};
 use crate::routes::error_chain_fmt;
 use crate::session_state::TypedSession;
 
